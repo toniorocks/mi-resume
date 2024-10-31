@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import * as Aos from 'aos';
+
 import { environment } from '../../environments/environment.development';
 
 export interface TimelineItem {
@@ -17,9 +20,12 @@ export interface TimelineItem {
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })
-export class TimelineComponent {
+export class TimelineComponent implements OnInit {
   items:TimelineItem[] = environment.data.timeline.items;
   constructor() {
     console.log('TimelineComponent created', environment);
+  }
+  ngOnInit(): void {
+    Aos.init();
   }
 }

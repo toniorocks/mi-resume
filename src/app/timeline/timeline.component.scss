@@ -8,20 +8,34 @@
   float: left;
 }
 
-.timeline-main{
-  list-style: none; /* Elimina los puntos de la lista */
-  list-style-position: outside; /* Asegúrate de que los puntos de la lista estén fuera del contenedor */
+ul#timeline-list li{
+  display: flex; /* Asegúrate de que los elementos de la lista se muestren en línea */
+  justify-content: flex-end; /* Alinea los elementos de la lista */
+  //margin-bottom: 20rem; /* Ajusta la separación entre los elementos */
+}
+
+ul#timeline-list li:nth-child(odd){
+  display: flex; /* Asegúrate de que los elementos de la lista se muestren en línea */
+  justify-content: flex-start; /* Alinea los elementos de la lista */
+  //margin-bottom: 20rem; /* Ajusta la separación entre los elementos */
 }
 
 ul li article{
   text-align: right; /* Alinea el texto a la derecha */
   width: 45%; /* Ajusta el ancho de los elementos */
-  margin-bottom: 20rem !important; /* Ajusta la separación entre los elementos */
+  height: 40vh;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 ul li:nth-child(odd) article{
   text-align: left; /* Alinea el texto a la derecha */
-  width: 45%; /* Ajusta el ancho de los elementos */
   float: right;
-  margin-top: 20rem !important; /* Ajusta la separación entre los elementos */
+  //margin-top: 20rem !important; /* Ajusta la separación entre los elementos */
+}
+
+@media (max-width: 768px) {
+  ul#timeline-list li article{
+    width: 100%; /* Ajusta el ancho de los elementos */
+  }
 }

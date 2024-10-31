@@ -1,10 +1,10 @@
 <div id="timeline-root" class="px-3">
   <h2 class="float-none text-center">Professional Experience</h2><br>
   <div class="vertical-line float"></div>
-  <!-- <ul class="timeline-main pt-3">
+  <ul id="timeline-list" class="timeline-main ps-0">
     @for (item of items; track item.title) {
     <li class="timeline-item mb-5">
-      <article class="p-5 mt-5 border border-black">
+      <article class="p-5 mt-5 bg-white border border-black" data-aos="flip-up">
         <h1>{{ item.company }}</h1>
         <p>{{ item.title }}</p>
         @if(item.endDate == null) {
@@ -20,5 +20,5 @@
       </article>
     </li>
   }
-  </ul> -->
+  </ul>
 </div>
