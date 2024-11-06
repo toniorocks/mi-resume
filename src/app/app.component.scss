@@ -1,8 +1,18 @@
+footer {
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+
+}
+
 #top-menu{
 
   position: fixed;
   top: 0;
   right: 0;
   width: 3em;
+  z-index: 1000;
 
 }

@@ -8,19 +8,20 @@
   float: left;
 }
 
-ul#timeline-list li{
+ul#timeline-list app-tl-item{
   display: flex; /* Asegúrate de que los elementos de la lista se muestren en línea */
   justify-content: flex-end; /* Alinea los elementos de la lista */
+  list-style: none; /* Elimina los puntos de la lista */
   //margin-bottom: 20rem; /* Ajusta la separación entre los elementos */
 }
 
-ul#timeline-list li:nth-child(odd){
+ul#timeline-list app-tl-item:nth-child(odd){
   display: flex; /* Asegúrate de que los elementos de la lista se muestren en línea */
   justify-content: flex-start; /* Alinea los elementos de la lista */
   //margin-bottom: 20rem; /* Ajusta la separación entre los elementos */
 }
 
-ul li article{
+ul app-tl-item article{
   text-align: right; /* Alinea el texto a la derecha */
   width: 45%; /* Ajusta el ancho de los elementos */
   height: 40vh;
@@ -28,14 +29,14 @@ ul li article{
   overflow-y: auto;
 }
 
-ul li:nth-child(odd) article{
+ul app-tl-item:nth-child(odd) article{
   text-align: left; /* Alinea el texto a la derecha */
   float: right;
   //margin-top: 20rem !important; /* Ajusta la separación entre los elementos */
 }
 
 @media (max-width: 768px) {
-  ul#timeline-list li article{
+  ul#timeline-list app-tl-item article{
     width: 100%; /* Ajusta el ancho de los elementos */
   }
 }

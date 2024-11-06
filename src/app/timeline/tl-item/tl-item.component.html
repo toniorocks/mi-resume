@@ -1,0 +1,18 @@
+@if(item){
+  <li class="timeline-item mb-5">
+    <article class="p-5 mt-5 bg-white border border-black" data-aos="flip-up">
+      <h1>{{ item.company }}</h1>
+      <p>{{ item.title }}</p>
+      @if(item.endDate == null) {
+        <p><small>Current Job</small></p>
+      } @else {
+        <p><small>{{ item.startDate }} - {{ item.endDate }}</small></p>
+      }
+      <ul>
+        @for(description of item.description; track description) {
+          <li>{{ description }}</li>
+        }
+      </ul>
+    </article>
+  </li>
+}
