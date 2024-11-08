@@ -5,6 +5,7 @@ export const environment = {
     timeline: {
       items: [
         {
+          id: 1,
           title: "Sr Fullstack Software Developer",
           company: "TCS",
           location: "Guadalajara, Jalisco, México",
@@ -14,6 +15,7 @@ export const environment = {
           visible: null,
         },
         {
+          id: 2,
           title: "Sr Software Engineer",
           company: "Softtek",
           location: "Ciudad México, México",
@@ -23,6 +25,7 @@ export const environment = {
           visible: null,
         },
         {
+          id: 3,
           title: "Frontend Developer",
           company: "AITI",
           location: "Tlalnepantla, Estado de México, México",
@@ -32,6 +35,7 @@ export const environment = {
           visible: null,
         },
         {
+          id: 4,
           title: "Software Developer",
           company: "GO! Fitness",
           location: "Ciudad México, México",
@@ -41,6 +45,7 @@ export const environment = {
           visible: null,
         },
         {
+          id: 5,
           title: "Technical Leader",
           company: "Indra",
           location: "Ciudad México, México",
@@ -50,6 +55,7 @@ export const environment = {
           visible: null,
         },
         {
+          id: 6,
           title: "System Administrator",
           company: "Graphimedic",
           location: "Ciudad México, México",

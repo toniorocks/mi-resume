@@ -23,8 +23,8 @@ ul#timeline-list app-tl-item:nth-child(odd){
 
 ul app-tl-item article{
   text-align: right; /* Alinea el texto a la derecha */
-  width: 45%; /* Ajusta el ancho de los elementos */
-  height: 40vh;
+  width: 20em; /* Ajusta el ancho de los elementos */
+  height: 33vh;
   overflow: hidden;
   overflow-y: auto;
 }
@@ -37,6 +37,7 @@ ul app-tl-item:nth-child(odd) article{
 
 @media (max-width: 768px) {
   ul#timeline-list app-tl-item article{
-    width: 100%; /* Ajusta el ancho de los elementos */
+    width: 25em; /* Ajusta el ancho de los elementos */
+    max-width: 100%;
   }
 }

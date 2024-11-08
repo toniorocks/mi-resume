@@ -1,6 +1,6 @@
 @if(item){
-  <li class="timeline-item mb-5">
-    <article class="p-5 mt-5 bg-white border border-black" data-aos="flip-up">
+  <li id="{{item.id}}" class="timeline-item mb-5">
+    <article [@screen]="item.visible ==  true ? 'in' : direction" class="p-5 mt-5 bg-white border border-black">
       <h1>{{ item.company }}</h1>
       <p>{{ item.title }}</p>
       @if(item.endDate == null) {
@@ -8,11 +8,8 @@
       } @else {
         <p><small>{{ item.startDate }} - {{ item.endDate }}</small></p>
       }
-      <ul>
-        @for(description of item.description; track description) {
-          <li>{{ description }}</li>
-        }
-      </ul>
+      <button class="btn btn-sm btn-secondary" (click)="toggleDescription()">Ver</button>
     </article>
   </li>
+  <div #asideItem></div>
 }
