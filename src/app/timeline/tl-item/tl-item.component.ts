@@ -1,26 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewEncapsulation, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { TimelineItem } from '../timeline.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
-@Component({
-  selector: 'item-aside',
-  standalone: true,
-  imports: [],
-  template: `
-    <div class="timeline-item-aside" data-aos="fade-right">
-      <div class="timeline-item-aside-content">
-        <h3>Aside</h3>
-        <p>Aside content</p>
-      </div>
-    </div>
-  `,
-  encapsulation: ViewEncapsulation.None
-})
-export class ItemAsideComponent {
-  constructor() {
-    console.log('ItemAsideComponent created');
-  }
-}
 
 @Component({
   selector: 'app-tl-item',
@@ -41,37 +21,80 @@ export class ItemAsideComponent {
     ])
   ]
 })
-export class TlItemComponent implements OnInit, OnChanges {
-
-  @ViewChild('asideItem', { read: ViewContainerRef, static: true }) asideItem: ViewContainerRef | undefined;
+export class TlItemComponent implements OnInit, AfterViewInit {
 
   direction:string = 'outLeft';
+  asideVisible = false;
+  newDiv: HTMLDivElement | null = null;
 
   @Input() item: TimelineItem | undefined;
-  //@Input() visibleItem: TimelineItem | undefined;
 
-  constructor() {
-    console.log('TlItemComponent created');
-
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('TlItemComponent ngOnChanges', changes);
-    if (changes['item'] && !changes['item'].isFirstChange()) {
-      //this.triggerAnimation();
-    }
-  }
+  constructor(private renderer: Renderer2) {  }
 
   ngOnInit(): void {
-    if (this.item && this.item.id % 2 === 0) {
-      this.direction = 'outRight';
-    } else {
-      this.direction = 'outLeft';
+
+    this.direction = (this.item && this.item.id % 2 === 0) ? 'outRight' : 'outLeft';
+
+  }
+
+  ngAfterViewInit(): void {
+    this.createDivElement();
+  }
+
+  private createDivElement(): void {
+    const newDiv = this.renderer.createElement('div');
+    const text = this.renderer.createText('Este es un div creado dinámicamente');
+    this.renderer.appendChild(newDiv, text);
+    this.renderer.setStyle(newDiv, 'background-color', 'lightblue');
+    this.renderer.setStyle(newDiv, 'width', '300px');
+    this.renderer.setStyle(newDiv, 'position', 'relative');
+    this.renderer.setStyle(newDiv, 'display', 'block');
+    this.renderer.setStyle(newDiv, 'height', '10vh');
+    if(this.direction === 'outLeft'){
+      this.renderer.setStyle(newDiv, 'float', 'left');
+      this.renderer.setStyle(newDiv, 'margin-top', '15vh');
+    }else{
+      this.renderer.setStyle(newDiv, 'margin-top', '-25vh');
+      this.renderer.setStyle(newDiv, 'float', 'right');
+    }
+    this.renderer.setStyle(newDiv, 'visibility', 'hidden');
+    this.newDiv = newDiv;
+    if (this.item) {
+      const parentElement = this.renderer.selectRootElement(`#li-item-${this.item.id}`, true);
+      this.renderer.appendChild(parentElement, this.newDiv);
     }
   }
 
-  triggerAnimation() {
-    console.log('triggerAnimation', this.direction);
-  }
+
+
+
+
+  // triggerAnimation(itemId: number): void {
+  //   const parentElement = this.renderer.selectRootElement('#li-item-' + itemId, true);
+
+  //   if (this.item && this.item.id === itemId) {
+  //     const newDivId = 'new-div-' + itemId;
+  //     this.asideVisible = true;
+  //     this.newDiv = this.renderer.createElement('div');
+
+  //     const text = this.renderer.createText('Este es un div creado dinámicamente');
+  //     this.renderer.appendChild(this.newDiv, text);
+  //     this.renderer.addClass(this.newDiv, 'mi-clase');
+  //     this.renderer.setStyle(this.newDiv, 'background-color', 'lightblue');
+  //     if(this.item.visible){
+
+  //       if (parentElement && !parentElement.attributes['aside-visible']) {
+
+  //         this.renderer.setAttribute(parentElement, 'aside-visible', 'true');
+  //         this.renderer.appendChild(parentElement, this.newDiv);
+
+  //       }
+  //       console.log(parentElement.attributes);
+  //       //
+  //     }
+  //   }
+
+  // }
 
   public toggleDescription(): void {
 

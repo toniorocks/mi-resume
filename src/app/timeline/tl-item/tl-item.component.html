@@ -1,5 +1,5 @@
 @if(item){
-  <li id="{{item.id}}" class="timeline-item mb-5">
+  <li id="li-item-{{item.id}}" class="timeline-item mb-5">
     <article [@screen]="item.visible ==  true ? 'in' : direction" class="p-5 mt-5 bg-white border border-black">
       <h1>{{ item.company }}</h1>
       <p>{{ item.title }}</p>
@@ -11,5 +11,4 @@
       <button class="btn btn-sm btn-secondary" (click)="toggleDescription()">Ver</button>
     </article>
   </li>
-  <div #asideItem></div>
 }

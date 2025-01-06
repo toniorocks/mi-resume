@@ -36,12 +36,13 @@ export interface TimelineItem {
 export class TimelineComponent implements OnInit {
 
   items:TimelineItem[] = environment.data.timeline.items;
-  animationState = 'desvanecido';
+  animationState:string = 'desvanecido';
   closestElement: HTMLElement | null = null;
   @ViewChildren(TlItemComponent) tlItems: TlItemComponent[] | undefined;
+  asideVisible:boolean = false;
 
   constructor() {
-    console.log('TimelineComponent created', environment);
+
   }
   ngOnInit(): void {
     Aos.init();
@@ -70,7 +71,9 @@ export class TimelineComponent implements OnInit {
       const rect = element.getBoundingClientRect();
       const distance = Math.abs(rect.top - windowHeight / 2);
       element = element as HTMLElement;
-      const item = this.items.find((item) => item.id === parseInt(element.getAttribute('id') as string, 10));
+
+      const item = this.items.find((i) => 'li-item-' + i.id === element.getAttribute('id') as string, 10);
+
       if (distance < closestDistance && item !== undefined) {
         if (closestElement !== null) {
           if(closestElement !== element) {
@@ -79,9 +82,6 @@ export class TimelineComponent implements OnInit {
         }
         closestElement = element as HTMLElement;
         item.visible = true;
-        this.triggerChildAnimation(item.id);
-        console.log('triggerChildAnimation 2', item.id);
-
         closestDistance = distance;
         this.closestElement = closestElement;
       } else {
@@ -90,20 +90,11 @@ export class TimelineComponent implements OnInit {
       }
     });
 
-    //console.log('scrollPosition', scrollPosition, 'windowHeight', windowHeight, 'documentHeight', documentHeight, 'closestElement', closestElement);
-
     // Check if the scroll position is at the middle of the page
     if (scrollPosition > (documentHeight - windowHeight) / 2) {
       this.animationState = 'visible';
     } else {
       this.animationState = 'desvanecido';
-    }
-  }
-
-  private triggerChildAnimation(itemId: number): void {
-    const activeChildComponent = this.tlItems?.find((item) => item.item?.id === itemId);
-    if (activeChildComponent) {
-      activeChildComponent.triggerAnimation();
     }
   }
 
