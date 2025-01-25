@@ -30,9 +30,12 @@
       }
     </div>
     <div class="col-md-2 mb-4">
-      <ul class="list-group border-0">
+      <ul appFixedPosition class="list-group border-0">
         @for (year of filteredYears; track $index) {
-        <li class="list-group-item border-0">{{ year }}</li>
+        <li class="list-group-item border-0">
+          <i class="bi bi-circle"></i>
+          {{ year }}
+        </li>
         }
       </ul>
     </div>

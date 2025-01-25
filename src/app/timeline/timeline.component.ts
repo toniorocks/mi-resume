@@ -3,12 +3,13 @@ import { environment } from '../../environments/environment';
 import { ElapsedPeriodDirective } from '../directives/elapsed-period.directive';
 import { WorkedPeriodDirective } from '../directives/worked-period.directive';
 import { MiModalService } from '../mi-modal/mi-modal.service';
+import { FixedPositionDirective } from '../directives/fixed-on-scroll.directive';
 
 
 @Component({
   selector: 'app-timeline',
   standalone: true,
-  imports: [ElapsedPeriodDirective, WorkedPeriodDirective],
+  imports: [ElapsedPeriodDirective, WorkedPeriodDirective, FixedPositionDirective],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })
