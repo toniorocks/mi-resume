@@ -15,12 +15,15 @@ export class FixedPositionDirective implements AfterViewInit {
 
   @HostListener('window:scroll', []) onWindowScroll() {
     const currentScroll = window.scrollY;
+    const curreentElementWidth = this.el.nativeElement.getBoundingClientRect().width;
 
     if (currentScroll >= this.fixmeTop) {
       this.el.nativeElement.style.position = 'fixed';
       this.el.nativeElement.style.top = '0';
+      this.el.nativeElement.style.width = curreentElementWidth + 'px';
     } else {
       this.el.nativeElement.style.position = 'static';
+      this.el.nativeElement.style.width = 'auto';
     }
   }
 

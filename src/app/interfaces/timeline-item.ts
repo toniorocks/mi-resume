@@ -10,4 +10,5 @@ export interface TimelineItem {
   visible?: boolean;
   current?: boolean;
   technologies?: string[];
+  active?: boolean;
 }

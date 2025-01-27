@@ -16,3 +16,76 @@ footer {
   z-index: 1000;
 
 }
+
+.gemini{
+  background: radial-gradient(circle, rgb(255, 0, 0) 0%, rgb(0, 0, 255) 100%);
+  background-clip: text;
+  color: transparent;
+  animation: gemini 5s linear infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gemini {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.highlight {
+  position: relative !important;
+  border-radius: var(--border-radius) !important;
+  padding: 4px !important;
+}
+
+.highlight .inner {
+  border-radius: 4px !important;
+}
+
+.highlight::before,
+.highlight::after {
+  content: "";
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(
+    45deg,
+    #ff595e,
+    #ffca3a,
+    #8ac926,
+    #1982c4,
+    #6a4c93,
+    #ff6700
+  ) !important;
+  background-size: 400% !important;
+  z-index: -1 !important;
+  animation: glow 20s linear infinite !important;
+  width: 100% !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.highlight::after {
+  filter: blur(25px) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+@keyframes glow {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
