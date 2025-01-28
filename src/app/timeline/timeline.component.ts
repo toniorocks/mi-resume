@@ -18,25 +18,28 @@ export class TimelineComponent implements OnInit {
 
   items: any[];
   filteredYears: number[];
+  activeYear: number | null = null;
+
   constructor(private modal: MiModalService) {
     this.items = environment.data.timeline.items;
     this.filteredYears = this.getItemsYears();
   }
   ngOnInit(): void {
-    console.info('Timeline component initialized');
-    //this.modal.triggerModal();
+    console.log('Timeline component initialized');
   }
 
   private getItemsYears(): number[] {
-    const years = Array.from(this.items.map(item => new Date(item.startDate).getFullYear()));
-    return Array.from(new Set(years)); //to remove duplicates
+    const years = this.items.map(item => new Date(item.startDate).getFullYear());
+    return Array.from(new Set(years));
   }
 
   public openItemDetail(item: any): void {
+    console.log('Item selected', item);
     this.modal.showModal(item);
   }
 
   public highlightItemByYear(year: number): void {
+    this.activeYear = year;
     this.items.forEach(item => {
       item.active = new Date(item.startDate).getFullYear() === year;
     });
@@ -45,8 +48,8 @@ export class TimelineComponent implements OnInit {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-  }
 
 
   public getMainClass(item: any): string {

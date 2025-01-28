@@ -2,10 +2,18 @@
     cursor: pointer;
     transition: all 0.3s;
     &:hover{
-        background-color: #f5f5f5;
+      background: linear-gradient(
+        45deg,
+        red,
+        blue,
+      ) !important;
     }
     &.active{
-        background-color: #f5f5f5;
+      background: linear-gradient(
+        45deg,
+        red,
+        blue,
+      ) !important;
     }
 
     list-style-type: disc !important;

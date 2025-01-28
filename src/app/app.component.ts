@@ -14,6 +14,7 @@ import { MiModalComponent } from "./mi-modal/mi-modal.component";
 export class AppComponent implements OnInit {
   title = 'mi-resume';
   state: boolean = true;
+  currentYear: number = new Date().getFullYear();
 
   constructor(
   ) {}
