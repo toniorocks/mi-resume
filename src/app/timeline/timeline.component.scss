@@ -4,15 +4,16 @@
     &:hover{
       background: linear-gradient(
         45deg,
-        red,
-        blue,
+        #000,
+        #555,
       ) !important;
+      color: white;
     }
     &.active{
       background: linear-gradient(
         45deg,
-        red,
-        blue,
+        #000,
+        #555,
       ) !important;
     }
 
@@ -20,51 +21,42 @@
 }
 
 .highlight {
-  position: relative !important;
-  border-radius: var(--border-radius) !important;
-  padding: 4px !important;
+	position: relative;
+	//margin: 300px auto 0;
+	// width: 500px;
+	// height: 250px;
+	// background: linear-gradient(0deg, #000, #272727);
 }
 
-.highlight .inner {
-  border-radius: 4px !important;
+.highlight:before, .highlight:after {
+	content: '';
+	position: absolute;
+	left: -50;
+	top: 0;
+	background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094,
+		#0000ff, #00ff00,#ffff00, #ff0000);
+	background-size: 200%;
+	width: 98%;
+	height: 100%;
+  margin-left: 1%;
+	z-index: -1;
+	animation: steam 20s linear infinite;
 }
 
-.highlight::before,
-.highlight::after {
-  content: "";
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  bottom: 0 !important;
-  right: 0 !important;
-  background: linear-gradient(
-    45deg,
-    red,
-    blue,
-  ) !important;
-  background-size: 400% !important;
-  z-index: -1 !important;
-  animation: glow 20s linear infinite !important;
-  width: 100% !important;
-  border-radius: var(--border-radius) !important;
+@keyframes steam {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
 }
 
-.highlight::after {
-  filter: blur(25px) !important;
-  transform: translate3d(0, 0, 0) !important;
+.highlight:after {
+	filter: blur(50px);
 }
 
-@keyframes glow {
-  0% {
-    background-position: 0 0;
-  }
-
-  50% {
-    background-position: 100% 0;
-  }
-
-  100% {
-    background-position: 0 0;
-  }
-}
 
