@@ -5,12 +5,13 @@ import { WorkedPeriodDirective } from '../directives/worked-period.directive';
 import { MiModalService } from '../mi-modal/mi-modal.service';
 import { FixedPositionDirective } from '../directives/fixed-on-scroll.directive';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-timeline',
   standalone: true,
-  imports: [ElapsedPeriodDirective, WorkedPeriodDirective, FixedPositionDirective, CommonModule],
+  imports: [ElapsedPeriodDirective, WorkedPeriodDirective, FixedPositionDirective, CommonModule, RouterModule],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })

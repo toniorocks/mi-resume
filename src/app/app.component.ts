@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.component';
 import { MiNotificationModule } from './mi-notification/mi-notification.module';
 import { MiModalComponent } from "./mi-modal/mi-modal.component";
@@ -7,7 +7,7 @@ import { MiModalComponent } from "./mi-modal/mi-modal.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopMenuButtonComponent, MiNotificationModule, MiModalComponent],
+  imports: [RouterModule, RouterOutlet, TopMenuButtonComponent, MiNotificationModule, MiModalComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
