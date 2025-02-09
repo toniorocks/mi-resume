@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ElapsedPeriodDirective } from '../directives/elapsed-period.directive';
 import { WorkedPeriodDirective } from '../directives/worked-period.directive';
@@ -6,32 +6,52 @@ import { MiModalService } from '../mi-modal/mi-modal.service';
 import { FixedPositionDirective } from '../directives/fixed-on-scroll.directive';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { JobsService } from '../services/jobs.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TimelineItem } from '../interfaces/timeline-item';
 
 @Component({
   selector: 'app-timeline',
   standalone: true,
-  imports: [ElapsedPeriodDirective, WorkedPeriodDirective, FixedPositionDirective, CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ElapsedPeriodDirective,
+    WorkedPeriodDirective,
+    FixedPositionDirective,
+    RouterModule,
+  ],
+  providers: [MiModalService, JobsService],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })
 export class TimelineComponent implements OnInit {
 
-  items: any[];
-  filteredYears: number[];
+  items: any[] = [];
+  filteredYears: number[] = [];
   activeYear: number | null = null;
 
-  constructor(private modal: MiModalService) {
-    this.items = environment.data.timeline.items;
-    this.filteredYears = this.getItemsYears();
+  constructor(
+    private modal: MiModalService,
+    @Inject(JobsService) private jobsService: JobsService
+  ) {
+    this.fetchItems();
   }
+
   ngOnInit(): void {
     console.log('Timeline component initialized');
   }
 
-  private getItemsYears(): number[] {
-    const years = this.items.map(item => new Date(item.startDate).getFullYear());
+  private getItemsYears(items:TimelineItem[]): number[] {
+    const years = items.map(item => new Date(item.startDate).getFullYear());
     return Array.from(new Set(years));
+  }
+
+  private fetchItems(): void {
+    this.jobsService.getJobs().subscribe(items => {
+      this.items = items;
+      this.filteredYears = this.getItemsYears(items);
+    });
   }
 
   public openItemDetail(item: any): void {
@@ -39,22 +59,34 @@ export class TimelineComponent implements OnInit {
     this.modal.showModal(item);
   }
 
+  public getMainClass(item: TimelineItem): string {
+    return item.active ? 'highlight' : '';
+  }
+
   public highlightItemByYear(year: number): void {
     this.activeYear = year;
     this.items.forEach(item => {
       item.active = new Date(item.startDate).getFullYear() === year;
     });
-    const firstItem = this.items.find(item => item.active);
-    const id:string = firstItem ? `item-${firstItem.id}` : '';
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-
-
-  public getMainClass(item: any): string {
-    return item.active ? 'highlight' : '';
+    this.scrollToItem(year);
   }
 
+  public scrollToItem(year: number): void {
+    const item = this.items.find(i => new Date(i.startDate).getFullYear() === year);
+    if (item) {
+      const element = document.getElementById(`item-${item.id}`);
+      console.log('Scrolling to item', item.id, element);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
+  }
+
+  trackByIndex(index: number): number {
+    return index;
+  }
 }
