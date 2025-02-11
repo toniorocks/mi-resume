@@ -16,6 +16,7 @@ export class MiModalService {
   showModal(item: TimelineItem | null) {
     if (item) {
       this.modalSubject.next(item);
+      console.log('modal ------- >', this.modalSubject);
     }
   }
 

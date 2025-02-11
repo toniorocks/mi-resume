@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { JobsService } from '../services/jobs.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TimelineItem } from '../interfaces/timeline-item';
+import { MiModalModule } from '../mi-modal/mi-modal.module';
+import { MiModalComponent } from '../mi-modal/mi-modal.component';
 
 @Component({
   selector: 'app-timeline',
@@ -20,8 +22,9 @@ import { TimelineItem } from '../interfaces/timeline-item';
     WorkedPeriodDirective,
     FixedPositionDirective,
     RouterModule,
+    MiModalModule
   ],
-  providers: [MiModalService, JobsService],
+  providers: [JobsService],
   templateUrl: './timeline.component.html',
   styleUrl: './timeline.component.scss'
 })

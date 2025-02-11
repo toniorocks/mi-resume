@@ -4,12 +4,15 @@ import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.compon
 import { MiNotificationModule } from './mi-notification/mi-notification.module';
 import { MiModalComponent } from "./mi-modal/mi-modal.component";
 import { CommonModule } from '@angular/common';
+import { MiModalModule } from './mi-modal/mi-modal.module';
+import { MiModalService } from './mi-modal/mi-modal.service';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterOutlet, TopMenuButtonComponent, MiNotificationModule, MiModalComponent],
+  imports: [CommonModule, RouterModule, RouterOutlet, TopMenuButtonComponent, MiNotificationModule, MiModalModule],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
