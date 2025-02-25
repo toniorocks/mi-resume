@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.component';
 import { MiNotificationModule } from './mi-notification/mi-notification.module';
@@ -6,6 +6,7 @@ import { MiModalComponent } from "./mi-modal/mi-modal.component";
 import { CommonModule } from '@angular/common';
 import { MiModalModule } from './mi-modal/mi-modal.module';
 import { MiModalService } from './mi-modal/mi-modal.service';
+import { TimelineStore } from './state/timeline.store';
 
 
 @Component({
@@ -21,8 +22,8 @@ export class AppComponent implements OnInit {
   state: boolean = true;
   currentYear: number = new Date().getFullYear();
 
-  constructor(
-  ) {}
+  readonly store = inject(TimelineStore);
+
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
   }
